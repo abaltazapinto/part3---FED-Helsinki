@@ -214,3 +214,30 @@ response.end(JSON.stringify(notes))copy
 ```
 
 With Express, this is no longer required, because this transformation happens automatically.
+
+Midleware is a function that receives 3 parameters(request, response, next).
+
+const requestLogger = (request, response, next ) => {
+  console.log('Method', request.method)..
+  ....
+  ...
+  next()
+}
+At the end of the function body, the next function that was passed as a parameter is called. The next function yields control to the next middleware.
+
+Middleware is used like this
+
+app.use(requestLogger)
+
+Remember, middleware functions are called in the order that they're encountered by the JavaScript engine. Notice that json-parser is listed before requestLogger because otherwise request.body will not be initialized when the logger is executed!
+
+Middleware functions have to be used before routes when we want them to be executed by the route event handlers. Sometimes, we want to use midldleware functions after routes. We do this when the midldleware functions are only called if no route handler processes the HTTP request.
+
+Let's add the following midlewareafter our routes. This middleware will be used for catching requests made to no-existing routes. For these requets, the midleware will return an error message in the JSON format.
+
+```
+const unknown = (request, response) => {
+  response.status(404).send({error: 'unknown endpoint' })
+}
+
+app.use(unknownEndpoint)
