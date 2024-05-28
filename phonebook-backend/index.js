@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const path = require('path');
 const app = express();
-const PORT = 3001;
+const port = process.env.PORT || 10000;
 
 // Middleware para registrar logs das requisições HTTP
 app.use(morgan('tiny'));
