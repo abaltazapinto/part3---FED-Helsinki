@@ -25,6 +25,7 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms :b
 
 
 // Serve static files from the "public" directory
+// eslint-disable-next-line no-undef
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Dados de exemplo
@@ -98,6 +99,7 @@ app.post('/api/persons', (req, res) => {
 
 // Serve the frontend (index.html) for any route not handled by the above routes
 app.get('*', (req, res) => {
+    // eslint-disable-next-line no-undef
     res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
