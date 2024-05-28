@@ -1,5 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
+const path = require('path');
 const app = express();
 const PORT = 3001;
 
@@ -17,7 +19,10 @@ morgan.token('body', (req) => {
   
   // Middleware for logging HTTP requests
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'));
-  
+
+
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Dados de exemplo
 let persons = [
