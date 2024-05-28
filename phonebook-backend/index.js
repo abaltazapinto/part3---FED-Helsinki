@@ -88,6 +88,11 @@ app.post('/api/persons', (req, res) => {
     res.json(persons);
 });
 
+// Serve the frontend (index.html) for any route not handled by the above routes
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+});
+
 
 // Iniciar o servidor
 app.listen(PORT, () => {
