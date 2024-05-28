@@ -5,6 +5,9 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 10000;
 
+// midleware to use and allow request from all origins
+app.use(cors());
+
 // Middleware para registrar logs das requisições HTTP
 app.use(morgan('tiny'));
 
